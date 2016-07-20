@@ -21,19 +21,19 @@ RUN rpm -Uvh http://repo.webtatic.com/yum/el6/latest.rpm
 
 RUN \
   yum -y install \
-  php \
-  php-cli \
-  php-gd \
-  php-mysql \
-  php-mbstring \
-  php-devel \
-  php-pecl-memcache \
-  php-pspell \
-  php-snmp \
-  php-xmlrpc \
-  php-xml \
-  php-pear \
-  php-tidy
+    php54w \
+    php54w-fpm \
+    php54w-mbstring \
+    php54w-cli \
+    php54w-gd \
+    php54w-mysql \
+    php54w-devel \
+    php54w-pecl-memcache \
+    php54w-pspell \
+    php54w-snmp \
+    php54w-xmlrpc \
+    php54w-xml \
+    php54w-pear
 
 RUN \
   yum -y install rubygems && \
@@ -48,7 +48,8 @@ RUN \
 
 ENV \
   LC_ALL=en_US.UTF-8 \
-  LANG=en_US.UTF-8
+  LANG=en_US.UTF-8 \
+  LEAF_DEVELOPMENT=1
 
 # -----------------------------------------------------------------------------
 # Apache configuration fixes

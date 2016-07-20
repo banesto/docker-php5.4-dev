@@ -6,7 +6,7 @@ Here's the [link to Docker Hub build](https://hub.docker.com/r/banesto/docker-ph
 
 ## Basic setup
 
-Image is based on Centos 6, uses php 5.3 and mysql 5.1. It makes following configuration changes:
+Image is based on Centos 6, uses php 5.4 and mysql 5.1. It makes following configuration changes:
 
 ### Apache config (/etc/httpd/conf/httpd.conf)
 
