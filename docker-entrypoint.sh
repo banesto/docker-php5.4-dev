@@ -12,6 +12,12 @@ trap before_exit EXIT
 
 set -eo pipefail
 
+cd /var/www/html && \
+  npm install --save-dev gulp && \
+  npm install --save-dev gulp-autoprefixer && \
+  npm install
+cd /
+
 /etc/init.d/mysqld start
 /etc/init.d/httpd start
 echo ""

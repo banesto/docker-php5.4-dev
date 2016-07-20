@@ -41,9 +41,23 @@ RUN \
   gem install bundler --no-rdoc --no-ri
 
 RUN \
+  yum -y install gcc-c++ && \
+  wget http://nodejs.org/dist/v0.10.4/node-v0.10.4.tar.gz && \
+  tar zxf node-v0.10.4.tar.gz && \
+  cd node-v0.10.4 && \
+  ./configure && \
+  make && \
+  make install && \
+  npm cache clean -f && \
+  npm install -g n && \
+  n stable && \
+  npm install gulp -g
+
+# delete source folder & archive? test if nothing fails after that
+RUN \
   yum -y install \
-    mysql-server \
-    mysql && \
+  mysql-server \
+  mysql && \
   chkconfig --levels 235 mysqld on
 
 ENV \
