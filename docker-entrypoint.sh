@@ -13,8 +13,6 @@ trap before_exit EXIT
 set -eo pipefail
 
 cd /var/www/html && \
-  npm install --save-dev gulp && \
-  npm install --save-dev gulp-autoprefixer && \
   npm install
 cd /
 

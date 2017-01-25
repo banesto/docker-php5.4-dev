@@ -51,13 +51,13 @@ RUN \
   npm cache clean -f && \
   npm install -g n && \
   n stable && \
-  npm install gulp -g
+  npm install -g grunt-cli
 
-# delete source folder & archive? test if nothing fails after that
+  # delete source folder & archive? test if nothing fails after that
 RUN \
   yum -y install \
-  mysql-server \
-  mysql && \
+    mysql-server \
+    mysql && \
   chkconfig --levels 235 mysqld on
 
 ENV \
