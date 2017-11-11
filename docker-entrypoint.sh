@@ -28,10 +28,23 @@ echo ""
 : "${DB_USER:=wordpress}"
 : "${DB_PASS:=wordpress}"
 
+# will run only if fresh install with initial temporary password
+while ! mysql -u root -e ";" ; do
+  temp_password=$(grep 'temporary password' /var/log/mysqld.log | tail -1 | awk '{print $11}')
+  echo "Temporary password is: ${temp_password}"
+
+  password=D0ck3r..
+  echo "Another temporary 'root' password is: ${password}"
+
+  mysql --user=root --password=${temp_password} --execute="SET PASSWORD = PASSWORD('${password}');" --connect-expired-password=true
+  mysql --user=root --password=${password} --execute="UNINSTALL PLUGIN validate_password;"
+  mysql --user=root --password=${password} --execute="SET PASSWORD = PASSWORD('');"
+done
+
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME} /*\!40100 DEFAULT CHARACTER SET utf8 */" && \
 mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASS}'" && \
 mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}'" && \
-mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO 'root'@'%'" && \
+mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO 'root'@'localhost'" && \
 mysql -u root -e "FLUSH PRIVILEGES"
 
 # if empty database & file /sql/*.sql files exist import latest sql file

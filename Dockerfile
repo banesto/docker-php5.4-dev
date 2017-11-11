@@ -28,7 +28,7 @@ RUN \
     php55w-mbstring \
     php55w-cli \
     php55w-gd \
-    php55w-mysql \
+    php55w-mysqli \
     php55w-devel \
     php55w-pecl-memcache \
     php55w-pspell \
@@ -37,10 +37,10 @@ RUN \
     php55w-xml \
     php55w-pear
 
-RUN \
-  yum -y install rubygems && \
-  gem install sass --no-rdoc --no-ri && \
-  gem install bundler --no-rdoc --no-ri
+#RUN \
+#  yum -y install rubygems && \
+#  gem install sass --no-rdoc --no-ri && \
+#  gem install bundler --no-rdoc --no-ri
 
 RUN \
   yum -y install gcc-c++ && \
@@ -57,9 +57,10 @@ RUN \
 
   # delete source folder & archive? test if nothing fails after that
 RUN \
-  yum -y install \
-    mysql-server \
-    mysql && \
+  yum -y remove mysql-libs && \
+  wget https://dev.mysql.com/get/mysql57-community-release-el6-11.noarch.rpm && \
+  yum -y localinstall mysql57-community-release-el6-11.noarch.rpm && \
+  yum -y install mysql-community-server && \
   chkconfig --levels 235 mysqld on
 
 ENV \
