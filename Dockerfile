@@ -17,23 +17,25 @@ RUN \
   rm -rf /etc/localtime && \
   ln -s /usr/share/zoneinfo/EET /etc/localtime
 
-RUN rpm -Uvh http://repo.webtatic.com/yum/el6/latest.rpm
+# RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+RUN rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
+# RUN yum search php
 
 RUN \
   yum -y install \
-    php54w \
-    php54w-fpm \
-    php54w-mbstring \
-    php54w-cli \
-    php54w-gd \
-    php54w-mysql \
-    php54w-devel \
-    php54w-pecl-memcache \
-    php54w-pspell \
-    php54w-snmp \
-    php54w-xmlrpc \
-    php54w-xml \
-    php54w-pear
+    php55w \
+    php55w-fpm \
+    php55w-mbstring \
+    php55w-cli \
+    php55w-gd \
+    php55w-mysql \
+    php55w-devel \
+    php55w-pecl-memcache \
+    php55w-pspell \
+    php55w-snmp \
+    php55w-xmlrpc \
+    php55w-xml \
+    php55w-pear
 
 RUN \
   yum -y install rubygems && \
